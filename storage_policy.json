@@ -1,0 +1,23 @@
+"properties": {
+   "displayName": "Audit Storage Accounts Open to Public Networks",
+   "policyType": "Custom",
+   "mode": "Indexed",
+   "description": "This policy ensures that storage accounts with exposure to Public Networks are audited.",
+   "parameters": {},
+   "policyRule": {
+       "if": {
+           "allOf": [{
+                   "field": "type",
+                   "equals": "Microsoft.Storage/storageAccounts"
+               },
+               {
+                   "field": "Microsoft.Storage/storageAccounts/networkAcls.defaultAction",
+                   "equals": "Allow"
+               }
+           ]
+       },
+       "then": {
+           "effect": "audit"
+       }
+   }
+}
